@@ -1,15 +1,13 @@
-# oobapi-ws
-[oobabooga/text-generation-webui](https://github.com/oobabooga/text-generation-webui) ~websocket~ streaming api wrapper
+# oobapi-stream
+[oobabooga/text-generation-webui](https://github.com/oobabooga/text-generation-webui) streaming api wrapper
 
-  This is a simple isomorphic wrapper for the oobabooga ~websocket~ streaming api (must be enabled when [launching ooba](https://github.com/oobabooga/text-generation-webui#api) with `--api`)
+  This is a simple isomorphic wrapper for the oobabooga api that handles the necessary HTTP shenanigans to stream token predictions to you as they come instead of getting a result all at once. To use it, API mode must be enabled when [launching ooba](https://github.com/oobabooga/text-generation-webui#api) by using `--api`
   
 ## Usage
 
-  ~~As this wrapper is meant to function the same in the browser as well as in node it must be passed a `WebSocket` object when instantiated. This can be either the browser context `WebSocket` or one from the [`ws` module](https://github.com/websockets/ws). See `node_example.mjs` and `browser_example.html` for more details.~~ No longer uses websockets.
-
   Ｗhen instantiating the api you can specify a host and a port, as well as default generation options．
   ```js
-  import ooba from 'oobapi-ws'
+  import ooba from 'oobapi-stream'
   const generation_options = {max_new_tokens: 1000}
   const host = 'remote.host.net'
   const port = 1337

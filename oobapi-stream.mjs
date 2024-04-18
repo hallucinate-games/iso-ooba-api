@@ -1,5 +1,5 @@
 import http from 'http'
-//default options from https://github.com/oobabooga/text-generation-webui/blob/main/api-example-stream.py
+// default options (model, prompt, and stream excepted) from OpenAI API documentation
 const default_options = {
   model: "unsloth_mistral-7b-instruct-v0.2-bnb-4bit",
   prompt: "[INST]In five sentences or less, explain what buffer solutions are and how they are relevant to biology.[/INST]",
@@ -11,7 +11,7 @@ const default_options = {
   max_tokens: 250,
   n: 1,
   presence_penalty: 0,
-  stream: true,
+  stream: true, // Do not overwrite this option.
   suffix: "",
   temperature: 1,
   top_p: 1,

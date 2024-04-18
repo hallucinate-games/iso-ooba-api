@@ -1,14 +1,14 @@
 {
-  "name": "oobapi-ws",
-  "version": "1.0.1",
-  "description": "oobabooga/text-generation-webui websocket api wrapper",
-  "main": "oobapi-ws.mjs",
+  "name": "oobapi-stream",
+  "version": "1.0.3",
+  "description": "oobabooga/text-generation-webui streaming api wrapper",
+  "main": "oobapi-stream.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thot-experiment/oobapi-ws.git"
+    "url": "git+https://github.com/hallucinate-games/oobapi-stream.git"
   },
   "keywords": [
     "oobabooga",
@@ -21,15 +21,24 @@
     "alpaca",
     "large",
     "language",
-    "model"
+    "model",
+    "stream"
   ],
-  "author": "thot-experiment",
+  "contributors": [
+    {
+      "name": "Matt Vana",
+      "email": "thot@hallucinate.games",
+      "url": "https://github.com/thot-experiment"
+    },
+    {
+      "name": "Elliot Corvinova",
+      "email": "elliot@hallucinate.games",
+      "url": "https://github.com/blueskymonster"
+    }
+  ],
   "license": "MIT",
-  "devDependencies": {
-    "ws": "^8.13.0"
-  },
   "bugs": {
-    "url": "https://github.com/thot-experiment/oobapi-ws/issues"
+    "url": "https://github.com/hallucinate-games/oobapi-stream/issues"
   },
-  "homepage": "https://github.com/thot-experiment/oobapi-ws#readme"
+  "homepage": "https://github.com/hallucinate-games/oobapi-streams#readme"
 }

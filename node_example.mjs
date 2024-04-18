@@ -1,4 +1,4 @@
-import ooba from './oobapi-ws.mjs'
+import ooba from './oobapi-stream.mjs'
 
 const api = ooba()
 
