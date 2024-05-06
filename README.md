@@ -1,49 +1,27 @@
-# oobapi-stream
-[oobabooga/text-generation-webui](https://github.com/oobabooga/text-generation-webui) streaming api wrapper
+# iso-ooba-api
+This is an oobabooga api wrapper that works the same in node and in the browser. It's a thin wrapper atop [openapi-autowrapper](https://www.npmjs.com/package/openapi-autowrapper) with some additional sauce to enable token streaming on the `v1/completions` endpoint.
 
-  This is a simple isomorphic wrapper for the oobabooga api that handles the necessary HTTP shenanigans to stream token predictions to you as they come instead of getting a result all at once. To use it, API mode must be enabled when [launching ooba](https://github.com/oobabooga/text-generation-webui#api) by using `--api`
-  
 ## Usage
+n.b. API mode must be enabled when [launching ooba](https://github.com/oobabooga/text-generation-webui#api) by using `--api`
+For general usage as well as self-documentation help see the docs for [openapi-autowrapper](https://www.npmjs.com/package/openapi-autowrapper). Oobabooga uses FastAPI which self documents at http://localhost:5000/docs by default, all the endpoints there are available through this wrapper. The most notable/useful part of this package is some additional code that implements token streaming via SSE on the `v1/completions` endpoint. See below:
 
-  Ｗhen instantiating the api you can specify a host and a port, as well as default generation options．
-  ```js
-  import ooba from 'oobapi-stream'
-  const generation_options = {max_new_tokens: 1000}
-  const host = 'remote.host.net'
-  const port = 1337
-  const api = ooba({host,port}, generation_options)
-  ```
-  or if you're running ooba locally and you want to use the default options you can omit both
-  ```js
-  const api = ooba()
-  ```
-  this will return an api object that is ready to make streaming requests.
+```js
+import ooba from 'iso-ooba-api'
 
-  in order to generate text simply call `api.generate()` with a prompt
-  ```js
-  const prompt = "In order to make homemade bread, follow these steps:\n1)"
-  api.generate(prompt)
-  ```
-  
-  and listen to generated tokens by supplying a function to `api.ontoken` 
-  ```js
-  api.ontoken = token => console.log(token)
-  ```
+const api = await ooba('http://localhost:5000')
 
-  you can also pass an options object containing any parameters for the specific generation instead of a string 
-  ```js
-  api.generate({
-    prompt: 'please write me a very long poem\n',
-    max_new_tokens: 1000,
-  })
-  ```
+const prompt = "In order to make homemade bread, follow these steps:\n1)"
 
-  additionally, the default `parameters` object is exposed as a property of the `api` object and can be freely modified to change the default parameters after instantiation
-  ```js
-  api.parameters.max_new_tokens = 1000
-  ```
+process.stdout.write(prompt)
 
-## Additional Notes
+//if stream is true, calls to POST expose two additional callbacks .ontext and .onchunk
+//the former returns the strings as they come out of the LLM and the latter returns the full JSON responses from ooba
 
-  Currently only the `stream` [api](https://github.com/oobabooga/text-generation-webui/blob/main/api-example-stream.py) is supported. The `chat-stream` [api](https://github.com/oobabooga/text-generation-webui/blob/main/api-example-chat-stream.py) is coming soon.
+let question = api['/v1/completions'].POST({prompt,stream:true})
+question.ontext = text => process.stdout.write(text)
 
+//question is *also* a promise that will resolve when generation finishes.
+let answer = await question
+//generate text
+console.log(question.text)
+```

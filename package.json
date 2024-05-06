@@ -1,22 +1,23 @@
 {
-  "name": "oobapi-stream",
-  "version": "1.0.3",
-  "description": "oobabooga/text-generation-webui streaming api wrapper",
-  "main": "oobapi-stream.mjs",
+  "name": "iso-ooba-api",
+  "version": "1.0.0",
+  "description": "oobabooga api wrapper that works the same in node and browser contexts",
+  "main": "ooba.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hallucinate-games/oobapi-stream.git"
+    "url": "github.com/hallucinate-games/iso-ooba-api"
   },
   "keywords": [
     "oobabooga",
-    "llm",
-    "chat",
     "text",
     "generation",
     "webui",
+    "llm",
+    "chat",
+    "generation",
     "llama",
     "alpaca",
     "large",
@@ -24,7 +25,8 @@
     "model",
     "stream"
   ],
-  "contributors": [
+  "author": "hallucinate-games",
+   "contributors": [
     {
       "name": "Matt Vana",
       "email": "thot@hallucinate.games",
@@ -37,8 +39,11 @@
     }
   ],
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/hallucinate-games/oobapi-stream/issues"
+  "dependencies": {
+    "openapi-autowrapper": "^1.0.0"
   },
-  "homepage": "https://github.com/hallucinate-games/oobapi-streams#readme"
+  "bugs": {
+    "url": "https://github.com/hallucinate-games/iso-ooba-api/issues"
+  },
+  "homepage": "https://github.com/hallucinate-games/iso-ooba-api#readme"
 }

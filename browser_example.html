@@ -10,17 +10,31 @@
     </style>
   </head>
   <body>
+    <script type="importmap">
+      {
+        "imports": {
+          "openapi-autowrapper": "./node_modules/OpenAPI-autowrapper/OpenAPI.mjs"
+        }
+      }
+    </script>
     <script type="module">
-      import ooba from './oobapi-stream.mjs'
+      import OobaAPI from './ooba.mjs'
+      const api = await OobaAPI({url:`http://${window.location.hostname}:5000`, dev:true})
 
-      const api = ooba()
       const prompt = "In order to make homemade bread, follow these steps:\n1)"
       document.body.innerText += prompt
 
-      api.ontoken = token => document.body.innerText += token
-      api.debugstream = console.log
+      let question = api['/v1/completions'].POST({prompt,stream:true})
+      question.ontext = token => document.body.innerText += token
+      question.onchunk = console.log
       
-      api.generate(prompt)
+      let answer = await question
+      console.log({answer})
+
+      window.api = api
+      console.log("dev mode gives you introspection powers in the console")
+      console.log("for example: api['/v1/completions'].describe() returns the following")
+      api['/v1/completions'].describe()
     </script>
   </body>
 </html>

@@ -1,19 +1,13 @@
-import ooba from './oobapi-stream.mjs'
+import OobaAPI from './ooba.mjs'
+const api = await OobaAPI({url:'http://localhost:5000'})
 
-const api = ooba()
+const prompt = "In order to make homemade bread, follow these steps:\n1)"
 
-const prompt = "[INST]In order to make homemade bread, follow these steps:[/INST]\n)"
-
-let response_complete = false
 process.stdout.write(prompt)
-api.ontoken = token => process.stdout.write(token)
-api.onend = () => response_complete = true
-api.onerror = () => response_complete = true
 
-api.generate(prompt)
+let question = api['/v1/completions'].POST({prompt,stream:true})
+question.ontext = text => process.stdout.write(text)
 
-const delay = ms => new Promise(res => setTimeout(res, ms))
+let answer = await question
 
-while (!response_complete) {
-  await delay(100)
-}
+console.log(`\n\nthe text generated was: \n${answer.text}`)
