@@ -3,6 +3,7 @@ This is an oobabooga api wrapper that works the same in node and in the browser.
 
 ## Usage
 n.b. API mode must be enabled when [launching ooba](https://github.com/oobabooga/text-generation-webui#api) by using `--api`
+
 For general usage as well as self-documentation help see the docs for [openapi-autowrapper](https://www.npmjs.com/package/openapi-autowrapper). Oobabooga uses FastAPI which self documents at http://localhost:5000/docs by default, all the endpoints there are available through this wrapper. The most notable/useful part of this package is some additional code that implements token streaming via SSE on the `v1/completions` endpoint. See below:
 
 ```js
