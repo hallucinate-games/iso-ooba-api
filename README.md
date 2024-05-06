@@ -23,6 +23,6 @@ question.ontext = text => process.stdout.write(text)
 
 //question is *also* a promise that will resolve when generation finishes.
 let answer = await question
-//generate text
+//generated text
 console.log(question.text)
 ```
